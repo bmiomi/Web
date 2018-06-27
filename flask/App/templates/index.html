@@ -1,0 +1,26 @@
+{%extends 'bootstrap/base.html'%}
+
+{%block title%}{{titulo}}{%endblock%}
+
+{% block styles %}
+{{super()}}
+<link rel="shortcut icon"  href="{{ url_for('static',filename='imgs/favicon.ico') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="jumbotron text-center">
+ 	<h1>Bienvenido</h1>
+ 		<p>{{raiz}}</p>
+	<p class="lead">Deseas registrarte da click en el botton de abajo</p>
+	<a href="{{ url_for ('register') }}" class="btn btn-primary btn-lg">Reguistro</a>
+	<a href="{{ url_for ('register') }}" class="btn btn-success btn-lg">Login</a>
+</div>
+
+<div id="footer">	
+{%block footer%}
+     &copy; Copyright 2018 by <a href="https://www.facebook.com/astssf">Bryan Miomi.</a>
+{%endblock%}
+</div>
+{%endblock%}
+

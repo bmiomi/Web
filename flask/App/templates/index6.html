@@ -1,0 +1,16 @@
+{%extends 'base/base.html'%}
+
+{% block content  %}
+<p>Usuario Registrado con exito</p>
+
+<div class="container">
+	{%if user%}
+		{% for comment in user%}
+			<p>{{coment.usuario}}</p>
+		{%endfor%}
+	{%endif%}
+</div>
+
+
+
+{%endblock%}
