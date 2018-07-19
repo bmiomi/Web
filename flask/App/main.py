@@ -17,6 +17,7 @@ app=create_app()
 app.config.from_object(DevelopmentConfig)
 csrf=CSRFProtect()
 
+#erro 404 paguina no encontrada
 @app.errorhandler(404)
 def page_not_found(e):
 	return render_template("errores.html"),404
@@ -28,19 +29,10 @@ def index():
 	raiz=" Hola como estas Actualmente te encuentras en la raiz de la paguina "
 	return  render_template("index.html",titulo=title,raiz=raiz)
 
-#inicio
-@app.route("/Inicio")
-def Inicio():
-	titulo = "Inicio"
-	resivircookie=request.cookies.get('cookiess','default')
-	print(resivircookie)
-	return render_template("index6.html", titulo=titulo)
-
 
 @app.route("/register",methods=['GET','POST'])
 def register():
 	frm=Forms.F_Registro(request.form)
-
 	if request.method == "POST" and frm.validate():
 
 		if frm.contrasena.data == request.form["confpassword"]:
@@ -84,32 +76,56 @@ def review(numero=1):
 	#user= Registro.query.join(Registro).add_colums(login.usuario,Accion.Deportes,Accion.Estudio)
 	#return render_template("index6.html",user=user)
 
-
-
-@app.route("/Lista")
+@app.route("/Lista") #lista sin conexion a base de datos.
 def Lista():
 	titulo = "Lista"
-	return render_template("index7.html", titulo=titulo)
+
+	listas=[
+		{   
+		    'author': {'nickname': 'John'},
+            'body': 'Beautiful day in Portland!'
+        },
+
+        {
+            'author': {'nickname': 'Susan'},
+            'body': 'The Avengers movie was so cool!'
+        },
+
+		 {
+            'author': {'nickname': 'Marco'},
+          
+		    'body': 'The Avengers movie was so wonderfull!'
+        },
+
+		 {
+            'author': {'nickname': 'carlos'},
+            'body': 'The Avengers movie was so ugle!'
+        }
+	]
+	print (listas)
+	return render_template("lista.html", titulo=titulo ,listas=listas)
+
+@app.route("/lista/db")#lista con conexion a base de datos.
+def listadb():
+	return render_template("lista.html",listas=Registro.query.all())
+
+#inicio
+@app.route("/Inicio")
+def Inicio():
+	titulo = "Inicio"
+	resivircookie=request.cookies.get('cookiess','default')
+	print(resivircookie)
+	return render_template("modal.html", titulo=titulo) 
+
+
 #Registro
 #ingreso de datos en la base de datos.
-
-
-
-
-
-
 
 #@app.route("/cookie")
 #def cookieread():
 #	response=make_response(render_template("index6.html"))
 #	response.set_cookie('cookiess','cook')
 #	return response
-
-
-
-
-
-
 
 """"
 @app.route("/mes",methods=['GET','POST'])
@@ -194,7 +210,6 @@ def indexs():
 def upload():
 	abort(401)
 	return redirect(url_for('cookie'))
-
 """
 
 

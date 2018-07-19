@@ -1,5 +1,8 @@
+{%extends 'bootstrap/base.html'%}
+
 <!DOCTYPE html>
 <html>
+
 {%block head %}
 <head>
 <title> {%block title%}{{titulo}}{%endblock%}</title>
@@ -8,18 +11,13 @@
 {%endblock%}
 
 <body>
-
-<div class="container">
-	{%block body%} {%endblock%}
+<div class= "container">
+	{% block content %}
+	
+	{% endblock  %}
 </div>
-
-	<div name="Content"> 
-		{%block content%} {%endblock%}
-	</div>
-
 </body>
 	
-
 {% block footer %}
 <footer>
      &copy; Copyright 2018 by <a href="https://www.facebook.com/astssf">Bryan Miomi</a>.
