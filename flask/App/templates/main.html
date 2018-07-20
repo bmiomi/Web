@@ -1,0 +1,101 @@
+{%extends 'bootstrap/base.html'%}
+
+<!DOCTYPE html>
+<html>
+
+{%block head%}
+{{super()}}
+	<link rel="stylesheet" type="text/css" href="static/css/simple-sidebar.css">
+{%endblock%}
+
+{% block  content %} 
+<div id="wrapper" >
+   
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">
+                        Sistema De Compras
+                    </a>
+                </li>
+                <li>
+                    <a href="#">Dashboard</a>
+                </li>
+                <li>
+                    <a href="#">Moda</a>
+                </li>
+                <li>
+                    <a href="#">Electrodomesticos</a>
+                </li>
+                <li>
+                    <a href="#">Tecnologia</a>
+                </li>
+                <li>
+                    <a href="#">Libros</a>
+                </li>
+                <li>
+                    <a href="#">Cine</a>
+                </li>
+                <li>
+                    <a href="#">Contact</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    
+                    <div class="col-md-4">
+                         <article>
+                           Jinja2 supports dynamic inheritance and does not distinguish between parent and child template as long as no extends tag is visited. While this leads to the surprising behavior that everything before the first extends tag including whitespace is printed out instead of being ignored, it can be used for a neat trick.
+
+                            Usually child templates extend from one template that adds a basic HTML skeleton. However it’s possible to put the extends tag into an if tag to only extend from the layout template if the standalone variable evaluates to false which it does per default if it’s not defined. Additionally a very basic skeleton is added to the file so that if it’s indeed rendered with standalone set to True a very basic HTML skeleton is added:   
+                        </article>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <article>
+                            This example would output empty <li> items because item is unavailable inside the block. The reason for this is that if the block is replaced by a child template, a variable would appear that was not defined in the block or passed to the context.
+
+                            Starting with Jinja 2.2, you can explicitly specify that variables are available in a block by setting the block to “scoped” by adding the scoped modifier to a block declaration:
+                        </article>
+                    </div>
+
+                    <div class="col-md-4">
+                        <article>
+                            When generating HTML from templates, there’s always a risk that a variable will include characters that affect the resulting HTML. There are two approaches:
+
+                            manually escaping each variable; or
+                            automatically escaping everything by default.
+
+                            Jinja supports both. What is used depends on the application configuration. The default configuration is no automatic escaping; for various reasons:
+
+                            Escaping everything except for safe values will also mean that Jinja is escaping variables known to not include HTML (e.g. numbers, booleans) which can be a huge performance hit.
+                            The information about the safety of a variable is very frag
+                        </article>
+                    </div>
+                </div>
+                <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Toggle Menu</a>
+            </div>
+        </div>
+        <!--page-content-wrapper -->`
+	</div>
+{%endblock%}
+
+{% block scripts %}
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<!--mi scripts-->
+<script src="static/js/js.js"></script> 
+{%endblock%}
+
+</html>
+

@@ -1,26 +1,17 @@
 {%extends 'bootstrap/base.html'%}
-
-<!DOCTYPE html>
-<html>
-
 {%block head %}
-<head>
 <title> {%block title%}{{titulo}}{%endblock%}</title>
-	<link rel="shortcut icon"  href="{{ url_for('static',filename='imgs/favicon.ico') }}">
-</head>
+<link rel="shortcut icon"  href="{{ url_for('static',filename='imgs/favicon.ico') }}">
 {%endblock%}
 
-<body>
 <div class= "container">
 	{% block content %}
 	
 	{% endblock  %}
 </div>
-</body>
 	
 {% block footer %}
 <footer>
      &copy; Copyright 2018 by <a href="https://www.facebook.com/astssf">Bryan Miomi</a>.
 </footer>
 {% endblock %}
-</html>

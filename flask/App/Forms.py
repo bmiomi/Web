@@ -1,5 +1,7 @@
-from wtforms import Form ,StringField,PasswordField,validators,BooleanField
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 
+from wtforms import Form ,StringField,PasswordField,validators,BooleanField
 
 class F_Registro(Form):
 
