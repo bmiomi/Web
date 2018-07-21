@@ -3,11 +3,7 @@
  * Copyright 2013-2017 Start Bootstrap
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-simple-sidebar/blob/master/LICENSE)
  */
-article {
-
-  background: #AFEEEE;
-}
-
+ 
 body {
   overflow-x: hidden;
 }
@@ -124,3 +120,43 @@ body {
     margin-right: 0;
   }
 }
+
+.product img{
+
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 150px;
+
+}
+
+.product h5{
+
+font-size:1.7em;
+margin-top:5px;
+margin-bottom:5px;
+text-align: center;
+
+}
+
+.car{
+width: 30%
+border-radius: 4px;
+background: white;
+box-shadow: 0 1px 3px rgba(0,0,0,0,0.12) 0 1px 2px rgba(0,0,0,0,0.24);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
