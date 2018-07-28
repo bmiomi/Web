@@ -1,27 +1,8 @@
 {%extends 'bootstrap/base.html'%}
-
-{%block title%}{{titulo}}{%endblock%}
-
-
-{%block navbar%}
- <div>
-          {% with messages = get_flashed_messages() %}
-          {%if  messages %}
-          <ul>
-            {%for message in messages %}
-              <div class="alert alert-success">{{message}}</div>
-            {%endfor%}
-          </ul>
-          {%endif%}
-        {%endwith%}
- </div>
-{%endblock%}
-
-
 {% from '_macro.html' import render_fields %}
 
+{%block title%}{{titulo}}{%endblock%}
 {%block content%}
-
 <div class="container">
   <div class="row ">
     <div class "col-md-12 ">
@@ -29,6 +10,7 @@
     </div>
   </div>
 <br>
+
   <div class="row">
     <div class =" col-md-12" >
       <form  method="POST" >

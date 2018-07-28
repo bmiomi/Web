@@ -1,16 +1,18 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from wtforms import Form ,StringField,PasswordField,validators,BooleanField
+from wtforms import Form 
+from wtforms import BooleanField,validators,StringField,PasswordField
+from wtforms.fields.html5 import DateField
 
-class F_Registro(Form):
+class Proveedor(Form):
 
-	Usuario = StringField('Usuario',[ validators.Length(min=4, max=30,message='El campo debe contener un almenos 4 caracteres')])
-	email = StringField('email', [ validators.length(min=10,max=30,message="Debe registrar el campo de  correo Electronico") ])
-	contrasena=  PasswordField('Contraseña', [ validators.DataRequired()])
-	confpassword = PasswordField('confirmar Contraseña')
-	accept_tos = BooleanField('rename me', [validators.DataRequired()])
+	CI = StringField('CI',[validators.Required(message="La CI es Obligratorio"),validators.Length(min=4,max=10,message='El campo es Obligatorio inserta una CI valida')])
+	
+	Nombre = StringField('Nombre',[validators.Length(min=4,max=20,message="El campo es Obligatorio inserta un Nombre valido")])
+	Apellido = StringField('Apellido',[validators.Length(min=4,max=20,message="El campo es Obligatorio inserta un Apellido valido" )])
+	FechaNacimiento = DateField('FechaNacimiento')
+	Sexo = BooleanField('Sexo', [validators.DataRequired()])
 
-class F_login(Form):
-	Usuario = StringField('Usuario', [validators.Length(min=4, max=30,message= 'El campo debe contener un almenos 4 caracteres' )])
-	contrasena=  PasswordField('Contrasena', [ validators.DataRequired()])
+
+

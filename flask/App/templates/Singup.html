@@ -1,26 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Singup</title>
+	<link rel="stylesheet" href=" {{ url_for( 'static',filename= 'css/auth.css') }} ">
+</head>
 
-{%extends 'bootstrap/base.html'%}
-
-{%block title%}{{titulo}}{%endblock%}
-
-		 
-{% from '_macro.html' import render_field %}
-
-{%block content%}
-
-<div class="Container">
-	<div class="row">
-		<div class= "col-md-12">
-			<h2><p align="center">SingUp</p></h2>	
+<body>
+	<div class="lowin">
+		<div class="lowin-brand">
+			<img src=" {{url_for ( 'static',filename= 'imgs/kodinger.jpg') }}" alt="logo">
 		</div>
+		<div class="lowin-wrapper">
+			<div class="lowin-box lowin-login">
+				<div class="lowin-box-inner">
+					<form>
+						<p>Inicia Seccion para Continuar</p>
+						<div class="lowin-group">
+							<label>Email <a href="#" class="login-back-link">Inicia Seccion?</a></label>
+							<input type="email" autocomplete="email" name="email" class="lowin-input">
+						</div>
+						<div class="lowin-group password-group">
+							<label>Password <a href="#" class="forgot-link">Olvidaste tu Password?</a></label>
+							<input type="password" name="password" autocomplete="current-password" class="lowin-input">
+						</div>
+						
+						<button class="lowin-btn login-btn">
+							Inicio de Seccion
+						</button>
+
+						<div class="text-foot">
+							No dispones de una cuenta? <a href="" class="register-link">Registrate</a>
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<div class="lowin-box lowin-register">
+				<div class="lowin-box-inner">
+					<form>
+						<p>Creemos una cuenta</p>
+						<div class="lowin-group">
+							<label>Nombre</label>
+							<input type="text" name="name" autocomplete="name" class="lowin-input">
+						</div>
+						<div class="lowin-group">
+							<label>Email</label>
+							<input type="email" autocomplete="email" name="email" class="lowin-input">
+						</div>
+						<div class="lowin-group">
+							<label>Password</label>
+							<input type="password" name="password" autocomplete="current-password" class="lowin-input">
+						</div>
+						<button class="lowin-btn">
+							Inicia Seccion
+						</button>
+
+						<div class="text-foot">
+							tenemos una Cuenta? <a href="" class="login-link">Login</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	
+		<footer class="lowin-footer">
+			Design By <a href="http://fb.me/itskodinger">@itskodinger</a>
+		</footer>
 	</div>
 
-	<div class ="row">
-		<div class = "col-md-12">
-	<!--<form method="POST">	-->	
-   		<p>ad</p>
-   		</div>
-	</div>
-</div>
-{% endblock %}
+	<script src=" {{ url_for('static',filename='js/auth.js') }}"></script>
+	<script>
+		Auth.init({
+			login_url: '#login',
+			forgot_url: '#forgot'
+		});
+	</script>
+</body>
+</html>
 
