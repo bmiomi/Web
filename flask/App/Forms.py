@@ -5,7 +5,7 @@ from wtforms import Form
 from wtforms import BooleanField,validators,StringField,PasswordField
 from wtforms.fields.html5 import DateField
 
-class Proveedor(Form):
+class Fr_Proveedor(Form):
 
 	CI = StringField('CI',[validators.Required(message="La CI es Obligratorio"),validators.Length(min=4,max=10,message='El campo es Obligatorio inserta una CI valida')])
 	
@@ -15,4 +15,11 @@ class Proveedor(Form):
 	Sexo = BooleanField('Sexo', [validators.DataRequired()])
 
 
+class Fr_Clientes (Form):
+	CI= StringField('CI',[validators.Required(message="la CI es Obligatorio")])
+	Nombre=StringField('Nombre')
+	Apellido=StringField('Apellido')
+	Estado=StringField('Estado')
+	FechaNacimiento=StringField('FechaNacimiento')
+	Sexo=StringField('Sexo')
 

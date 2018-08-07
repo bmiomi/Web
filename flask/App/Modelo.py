@@ -12,17 +12,17 @@ class Proveedor(db.Model):
 	Sexo=db.Column(db.String(1))
 
 
+class Clientes(db.Model):
+	__tablename__= "Cliente"
+	id = db.Column(db.Integer, primary_key=True)
+	Nombre = db.Column(db.String(50))
+	Apellido= db.Column(db.String(50))
+	estado=db.column(db.String(20))
+	FechaNacimiento=db.Column(db.String(50))
+	Sexo=db.column=(db.String(1))
+
 
 """
-class Registro(db.Model):
-	__tablename__= "Logins"
-	id = db.Column(db.Integer, primary_key=True)
-	usuario = db.Column(db.String(50),nullable=False)
-	contrasena= db.Column(db.String(50),nullable=False)
-	EMAIL=db.Column(db.String(50),nullable=False)
-
-
-
 class Accion(db.Model):
 	__tablename__= "Acciones"
 	id = db.Column(db.Integer, primary_key=True)
