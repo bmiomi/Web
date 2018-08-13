@@ -8,7 +8,7 @@ class Config(object):
 class DevelopmentConfig(Config):
 	
 	DEBUG = True
-	SQLALCHEMY_DATABASE_URI = 	"mysql://root:rous@localhost/SQLAlchemy"
+	SQLALCHEMY_DATABASE_URI = 	"mysql://root:Rous@localhost/SQLAlchemy"
 	SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 #	SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.abspath(os.getcwd ()) + "/flask.db"

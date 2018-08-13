@@ -5,7 +5,7 @@ from werkzeug.security import generate_password_hash,check_password_hash
 from flask_wtf.csrf import CSRFProtect
 from flask_bootstrap import Bootstrap
 from config import DevelopmentConfig
-from Modelo import Proveedor,db
+from Modelo import Proveedor,Clientes,db
 import Forms
 
 
@@ -23,7 +23,7 @@ def page_not_found(e):
 	return render_template("errores.html"),404
 
 @app.route("/") #raiz 
-def index():
+def index(): 	
 	title="Inicio"
 	raiz=" Hola como estas Actualmente te encuentras en la raiz de la paguina "
 	return  render_template("index.html",titulo=title,raiz=raiz)
@@ -37,7 +37,7 @@ def register():
 	frm=Forms.F_Registro(request.form)
 	if request.method == "POST" and frm.validate():
 		if frm.contrasena.data == request.form["confpassword"]:			
-			new_user= Registro(	
+			new_user= F_Registro(	
 							usuario= frm.Usuario.data,
 							contrasena=frm.contrasena.data,
 							EMAIL=frm.email.data
@@ -73,82 +73,32 @@ def proveedor():
 		db.session.commit()
 	else:
 		print("error")
-	return render_template("proveedor.html",frm=frm) 
+	return render_template("frproveedor.html",frm=frm) 
 
 @app.route("/listaP")#listado de Proveedores.
 def listaP():
 	pass
-	return render_template("lista.html",listas=Proveedor.query.all())
+	return render_template("listaP.html",listas=Proveedor.query.all())
 
 @app.route("/Cliente",methods=['GET','POST']) #registro de Clientes
 def Cliente():
 	frm=Forms.Fr_Clientes(request.form)
-	return render_template('cliente.html',frm=frm)
+	return render_template('frcliente.html',frm=frm)
 
 @app.route("/listaC") #listado de Clientes.
 def listaC():
-	titulo = "Lista"
-
-	listas=[
-
-		{   
-		    'author': {'nickname': 'John'},
-            'body': 'Beautiful day in Portland!'
-        },
-
-        {
-            'author': {'nickname': 'Susan'},
-            'body': 'The Avengers movie was so cool!'
-        },
-
-		 {
-            'author': {'nickname': 'Marco'},
-          
-		    'body': 'The Avengers movie was so wonderfull!'
-        },
-
-		 {
-            'author': {'nickname': 'carlos'},
-            'body': 'The Avengers movie was so ugle!'
-        }
-	]
-	print (listas)
-	return render_template("lista.html", titulo=titulo ,listas=listas)
+	titulo = "Listado de Clientes"
+	return render_template("listaC.html", titulo=titulo ,listas=Clientes.query.all())
 
 @app.route("/Productos",methods=['GET','POST']) #registro de Productos
 def Productos():
-	frm=Forms.Fr_Clientes(request.form)
-	return render_template('cliente.html',frm=frm)
+	frm=Forms.Fr_Productos(request.form)
+	return render_template('frProductos.html',frm=frm)
 
 @app.route("/listaPr") #listado de productos.	
-def ListaPr():
-	titulo = "Lista"
-
-	listas=[
-
-		{   
-		    'author': {'nickname': 'John'},
-            'body': 'Beautiful day in Portland!'
-        },
-
-        {
-            'author': {'nickname': 'Susan'},
-            'body': 'The Avengers movie was so cool!'
-        },
-
-		 {
-            'author': {'nickname': 'Marco'},
-          
-		    'body': 'The Avengers movie was so wonderfull!'
-        },
-
-		 {
-            'author': {'nickname': 'carlos'},
-            'body': 'The Avengers movie was so ugle!'
-        }
-	]
-	print (listas)
-	return render_template("lista.html", titulo=titulo ,listas=listas)
+def listaPr():
+	titulo = "Listado de Productos"
+	return render_template("listaPr.html", titulo=titulo)
 
 
 if __name__ == "__main__":

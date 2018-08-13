@@ -31,6 +31,7 @@
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 {%endblock%}</head>
+
 {%block content%}
 
   <!-- Content Wrapper. Contains page content -->
@@ -38,8 +39,8 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Data Tables
-        <small>advanced tables</small>
+        Tabla de Datos
+        <small>Cliente</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -53,29 +54,27 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Hover Data Table</h3>
+              <h3 class="box-title">Listado de Proveédores</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
               <table id="example2" class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                  <th>CI</th>
+                  <th>Id</th>
                   <th>Nombre</th>
                   <th>Apellido</th>
                   <th>FechaNacimiento</th>
-                  <th>Sexo</th>
                 </tr>
                 </thead>
 
                 <tbody>
                 {%for objeto in listas%}
                 <tr>
-                  <td>{{objeto.CI}}</td>
+                  <td>{{objeto.id}}</td>
                   <td>{{objeto.Nombre}}</td>
                   <td>{{objeto.Apellido}}</td>
                   <td> {{objeto.FechaNacimiento}}</td>
-                  <td>{{objeto.Sexo}}</td>
                 </tr>
               </tbody>
               {%endfor%}
@@ -88,15 +87,11 @@
  </section>
 </div>
 
-
-
 <footer class="main-footer">
     <div class="pull-right hidden-xs">
       <b>Version</b> 2.4.0
     </div>
-    <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
-    reserved.
-  </footer>
+    </footer>
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Create the tabs -->
@@ -312,17 +307,15 @@
 <script src="{{ url_for ( 'static' ,filename='dist/js/demo.js') }}"></script>
 <!-- page script -->
 <script>
-  $(function () {
-    $('#example1').DataTable()
-    $('#example2').DataTable({
-      'paging'      : false,
+  $(document).ready(function() {
+    $('#example2').DataTable();
+    'paging'      : false,
       'lengthChange': false,
       'searching'   : false,
       'ordering'    : true,
       'info'        : true,
       'autoWidth'   : false
-    })
-  })
+  });
 </script>
 
 {%endblock%}
