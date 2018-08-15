@@ -18,6 +18,11 @@ app=create_app()
 app.config.from_object(DevelopmentConfig)
 csrf=CSRFProtect()
 
+@app.route('/hello')
+def hello():
+    r = requests.get('http://www.google.com')
+    return r.text
+
 @app.errorhandler(404)#erro 404 paguina no encontrada
 def page_not_found(e):
 	return render_template("errores.html"),404
