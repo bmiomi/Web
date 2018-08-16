@@ -21,13 +21,10 @@ class Clientes(db.Model):
 	FechaNacimiento=db.Column(db.String(50))
 	Sexo=db.column=(db.String(1))
 
-
-"""
-class Accion(db.Model):
-	__tablename__= "Acciones"
-	id = db.Column(db.Integer, primary_key=True)
-	Deporte = db.Column(db.String(50),nullable=False)
-	Estudio= db.Column(db.String(50),nullable=False)
-	fk_usuario=db.Column(db.Integer,db.ForeignKey('Logins.id'))
-
-"""
+class productos(db.Model):
+	__tablename__= "Productos"
+	Codigo = db.Column(db.Integer, primary_key=True)
+	nombre = db.Column(db.String(50),nullable=False)
+	Categoria = db.Column(db.String(50),nullable=False)
+	Precio =db.Column(db.Integer)
+	stock =db.Column(db.Integer)

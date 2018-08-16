@@ -61,22 +61,22 @@
               <table id="example2" class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                  <th>CI</th>
+                  <th>Codigo</th>
                   <th>Nombre</th>
-                  <th>Apellido</th>
-                  <th>FechaNacimiento</th>
-                  <th>Sexo</th>
+                  <th>categoria</th>
+                  <th>precio</th>
+                  <th>stock</th>
                 </tr>
                 </thead>
 
                 <tbody>
                 {%for objeto in listas%}
                 <tr>
-                  <td>{{objeto.CI}}</td>
-                  <td>{{objeto.Nombre}}</td>
-                  <td>{{objeto.Apellido}}</td>
-                  <td> {{objeto.FechaNacimiento}}</td>
-                  <td>{{objeto.Sexo}}</td>
+                  <td>{{objeto.Codigo}}</td>
+                  <td>{{objeto.nombre}}</td>
+                  <td>{{objeto.Categoria}}</td>
+                  <td> {{objeto.Precio}}</td>
+                  <td>{{objeto.stock}}</td>
                 </tr>
               </tbody>
               {%endfor%}

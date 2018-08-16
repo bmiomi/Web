@@ -5,7 +5,7 @@ from werkzeug.security import generate_password_hash,check_password_hash
 from flask_wtf.csrf import CSRFProtect
 from flask_bootstrap import Bootstrap
 from config import DevelopmentConfig
-from Modelo import Proveedor,Clientes,db
+from Modelo import Proveedor,Clientes,productos,db
 import Forms
 
 
@@ -17,11 +17,6 @@ def create_app():
 app=create_app()
 app.config.from_object(DevelopmentConfig)
 csrf=CSRFProtect()
-
-@app.route('/hello')
-def hello():
-    r = requests.get('http://www.google.com')
-    return r.text
 
 @app.errorhandler(404)#erro 404 paguina no encontrada
 def page_not_found(e):
@@ -98,12 +93,27 @@ def listaC():
 @app.route("/Productos",methods=['GET','POST']) #registro de Productos
 def Productos():
 	frm=Forms.Fr_Productos(request.form)
+	if request.method == "POST" and frm.validate():
+		pr=db.session.query(productos).filter_by(Codigo=frm.Codigo.data).first()
+		print("este  producto ya existe ",str(pr))
+		if pr is None:
+#Insercion db
+			dbproductos = productos (Codigo=frm.Codigo.data,nombre=frm.nombre.data,
+									Categoria=frm.Categoria.data,Precio=frm.Precio.data,
+									stock=frm.stock.data)
+			db.session.add(dbproductos)
+			db.session.commit()
+		else:
+			mensaje="Error al ingresar los datos esto de puede deber a que ya existe ese producto con ese codigo"
+			flash(mensaje)
+			print(mensaje)
 	return render_template('frProductos.html',frm=frm)
 
 @app.route("/listaPr") #listado de productos.	
 def listaPr():
 	titulo = "Listado de Productos"
-	return render_template("listaPr.html", titulo=titulo)
+
+	return render_template("listaPr.html", titulo=titulo,listas=productos.query.all())
 
 
 if __name__ == "__main__":

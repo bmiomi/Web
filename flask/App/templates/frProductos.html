@@ -2,8 +2,19 @@
 {% from '_macro.html' import render_field %}
 
 {%block content%}
+
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
+      
+{% with messages = get_flashed_messages() %}
+{%if messages%}
+<ul>
+  {%for message in messages%}
+      <li>{{message}}</li>
+      {%endfor%}
+    </ul>
+{%endif%}
+{%endwith%}
       <!-- Content Header (Page header) -->
       <section class="content-header">
         <h1>
@@ -15,7 +26,6 @@
           <li class="active">Dashboard</li>
         </ol>
       </section>
-
 <section class="content">
     <!-- espacio del dasboard-->
           <div class="box box-primary">
@@ -35,7 +45,7 @@
                 </div>
 
                 <div class="form-group">
-                  {{ render_field(frm.Nombre,class= 'form-control col-ms-2',placeholder='Nombre') }}
+                  {{ render_field(frm.nombre,class= 'form-control col-ms-2',placeholder='Nombre') }}
                 </div>
 
                 <div class="form-group">
