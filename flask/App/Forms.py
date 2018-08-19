@@ -22,6 +22,7 @@ class Fr_Clientes (Form):
 	FechaNacimiento=StringField('FechaNacimiento')
 
 class Fr_Productos(Form):
+	
 	Codigo= StringField('Codigo',[validators.Required(message="El codigo del producto es Obligatorio")])
 	nombre=StringField('Nombre')
 	Categoria=SelectField('Categoria',[validators.Required(message="Seleccione un producto es obligatorio")], 

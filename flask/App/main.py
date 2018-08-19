@@ -30,7 +30,9 @@ def index():
 
 @app.route("/main") #Main
 def main():
-	return  render_template("borrar/base.html")
+	valorproductos=db.session.query(productos).filter(productos.Codigo).count()
+	print(valorproductos)
+	return  render_template("base_Interna/base.html",valorproductos=valorproductos)
 
 @app.route("/register",methods=['GET','POST']) #registro
 def register():
@@ -95,7 +97,6 @@ def Productos():
 	frm=Forms.Fr_Productos(request.form)
 	if request.method == "POST" and frm.validate():
 		pr=db.session.query(productos).filter_by(Codigo=frm.Codigo.data).first()
-		print("este  producto ya existe ",str(pr))
 		if pr is None:
 #Insercion db
 			dbproductos = productos (Codigo=frm.Codigo.data,nombre=frm.nombre.data,
@@ -106,7 +107,6 @@ def Productos():
 		else:
 			mensaje="Error al ingresar los datos esto de puede deber a que ya existe ese producto con ese codigo"
 			flash(mensaje)
-			print(mensaje)
 	return render_template('frProductos.html',frm=frm)
 
 @app.route("/listaPr") #listado de productos.	
