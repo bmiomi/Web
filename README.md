@@ -1,7 +1,7 @@
 
 ##  Demo Sistema Web
 
-Desarrollo de un Sistema Web realizado con SQlAlchemy flask html5 css javascrip
+Desarrollo de un Sistema Web realizado con SQlAlchemy Flask Html5 Css Javascrip
 en el cual se basara en  un crud  por lo cual se podra registar todo lo que se desee registrar  de la misma forma en caso de requir esa informacion creada se podra visualizar y si fuera necesacio editarla o en su defecto eliminarla. espero que les agrade
 poco a poco se iran subiendo actualizaciones del avance de este micro proyecto.
 
