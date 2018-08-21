@@ -28,6 +28,6 @@ poco a poco se iran subiendo actualizaciones del avance de este micro proyecto.
 
 ![captura de pantalla de 2018-08-21 13-03-57](https://user-images.githubusercontent.com/13080951/44420125-be10d980-a542-11e8-856b-7dae6da4b56d.png)
 
-* con el cual en caso de requerirla se podra acceder a ella de manera rapida eh intuitiva. *
+* Disponibilidad de que sus datos esten completos y en caso de requerir la informacion  esta se le precente logrado vusualizarla de manera rapida eh intuitiva,todo aquello que usted desee y haya sido ingresado en el  Demo sistema . *
 #### footer
                                             by bryanMiomi and AdminLTE
