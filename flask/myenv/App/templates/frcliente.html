@@ -1,0 +1,71 @@
+{% extends 'base_Interna/base.html'%}
+{% from '_macro.html' import render_field %}
+
+{%block content%}
+    <!-- Content Wrapper. Contains page content -->
+    {% with messages = get_flashed_messages() %}
+    {%if messages%}
+      {%for message in messages%}
+      <div class=" alert alert-warning">
+          <li>{{message}}</li>
+      </div>
+          {%endfor%}
+    {%endif%}
+    {%endwith%}
+
+
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <h1>
+          Personal
+          <small>Panel</small>
+        </h1>
+        <ol class="breadcrumb">
+          <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+          <li class="active">Dashboard</li>
+        </ol>
+      </section>
+
+<section class="content">
+    <!-- espacio del dasboard-->
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title"> Registro de Personal </h3>
+            </div>
+          
+            <!-- /.box-header -->
+
+            <!-- form start -->
+            <form role="form" method="POST">
+              <div class="box-body">
+
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/> 
+                <div class="form-group">
+                {{ render_field(frm.CI,class= 'form-control col-md-2',placeholder='Cedula de Identidad') }}
+                </div>
+
+                <div class="form-group">
+                {{ render_field(frm.Nombre,class= 'form-control col-md-2',placeholder='Nombre') }}
+                </div>
+
+                <div class="form-group">
+                {{ render_field(frm.Apellido,class= 'form-control col-md-2',placeholder='Apellido') }}
+                </div>
+
+                <div class="form-group">
+                {{ render_field(frm.FechaNacimiento,class= 'form-control col-md-2') }}
+                </div>
+               
+                <div class="form-group">
+                    {{ render_field(frm.Estado) }}
+                </div>
+
+                <div class="box-footer">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+              <!-- /.box-body -->
+            </form>
+          </div>
+</section>
+{%endblock%}
