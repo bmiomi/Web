@@ -1,13 +1,13 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from flask import Flask, render_template,request,make_response,redirect,url_for,abort,session,escape,flash
+from flask import Flask, render_template,request,make_response,redirect,\
+url_for,abort,session,escape,flash,jsonify
 from werkzeug.security import generate_password_hash,check_password_hash
 from flask_wtf.csrf import CSRFProtect
 from flask_bootstrap import Bootstrap
 from config import DevelopmentConfig
 from Modelo import Proveedor,Clientes,productos,db
 import Forms
-
 
 def create_app():
 	app = Flask(__name__)
@@ -33,10 +33,13 @@ def main():
 	valorproductos=db.session.query(productos).filter(productos.Codigo).count()
 	return  render_template("base_Interna/base.html",valorproductos=valorproductos,valorcliente=db.session.query(Clientes).filter(Clientes.id).count())
 
-@app.route("/modal")
-def modal():
-	pass
-	return render_template("modal.html")
+@app.route("/Lp")
+def Lp():
+	res=Proveedor.query.all()
+	listaproveedores=[r.as_dict() for r in res]
+	print(listaproveedores)
+	return jsonify(listaproveedores)
+
 
 
 @app.route("/register",methods=['GET','POST']) #registro
@@ -63,43 +66,47 @@ def Singup():
 	titulo="Singup"
 	return render_template("Singup.html", titulo = titulo)
 
+
 @app.route("/proveedor",methods=['GET','POST']) # registro de proveedor
 def proveedor():
-	frm=Forms.Fr_Proveedor(request.form)
-	if request.method == 'POST' and frm.validate():
-		new_user= Proveedor(CI=frm.CI.data,
-							Nombre=frm.Nombre.data,
-							Apellido=frm.Apellido.data,
-							FechaNacimiento=frm.FechaNacimiento.data,
-							Sexo=frm.Sexo.data)
-		db.session.add(new_user)
-		db.session.commit()
-		flash("Se registrado con exito sus datos")
-		redirect(url_for('proveedor'))
-	else:
-		flash("No se registrado con exito sus datos")
+	frm=Forms.Fr_Proveedor(request.form)	
+	if request.method == 'POST': 
+		if frm.validate():
+			new_user= Proveedor(CI=frm.CI.data,
+								Nombre=frm.Nombre.data,
+								Apellido=frm.Apellido.data,
+								FechaNacimiento=frm.FechaNacimiento.data,
+								Sexo=frm.Sexo.data)
+			db.session.add(new_user)
+			db.session.commit()
+			flash("Se registrado con exito sus datos")
+			redirect(url_for('proveedor'))
+		else:
+			flash("Error: No se registrado con exito sus Datos")
 	return render_template("frproveedor.html",frm=frm) 
+
 
 @app.route("/listaP")#listado de Proveedores.
 def listaP():
 	pass
-	return render_template("listaP.html",listas=Proveedor.query.all())
+	return render_template("listaP.html",	listas=Proveedor.query.all())
+
 
 @app.route("/Cliente",methods=['GET','POST']) #registro de Clientes
 def Cliente():
 	frm=Forms.Fr_Personal(request.form)
-	if request.method == "POST" and frm.validate():
-		cliente=Clientes(CI=frm.CI.data,
-						nombre=frm.Nombre.data,
-						apellido=frm.Apellido.data,
-						fechaN=frm.FechaNacimiento.data
-						)
-	
-		db.session.add(cliente)
-		db.commit()
-		flash("Se Aguardado los datos exitosamente")
+	if request.method == "POST":
+		if frm.validate():
+			cliente=Clientes(CI=frm.CI.data,
+							nombre=frm.Nombre.data,
+							apellido=frm.Apellido.data,
+							fechaN=frm.FechaNacimiento.data
+							)
+			db.session.add(cliente)
+			db.commit()
+			flash("Se Aguardado los datos exitosamente")
 	else:
-		pass
+			flash("No se registrado con exito sus datos",category="error")
 	return render_template('frcliente.html',frm=frm)
 
 @app.route("/listaC") #listado de Clientes.
@@ -137,5 +144,5 @@ if __name__ == "__main__":
 
 	with app.app_context():
 		db.create_all()# metodo para crear tablas y la propia db
-	app.run( port=8000 )
+	app.run( port=8001,debug=True)
 

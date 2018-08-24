@@ -3,9 +3,8 @@
 
 {%block content%}
 
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-      
+<!-- Content Wrapper. Contains page content -->
+ <div class="content-wrapper">
 {% with messages = get_flashed_messages() %}
 {%if messages%}
   {%for message in messages%}
@@ -15,6 +14,7 @@
       {%endfor%}
 {%endif%}
 {%endwith%}
+
       <!-- Content Header (Page header) -->
       <section class="content-header">
         <h1>
@@ -26,7 +26,8 @@
           <li class="active">Dashboard</li>
         </ol>
       </section>
-<section class="content">
+
+  <section class="content">
     <!-- espacio del dasboard-->
           <div class="box box-primary">
             <div class="box-header with-border">
@@ -53,15 +54,18 @@
                 </div>
                 
                 <div class="form-group">
-                  {{ render_field(frm.Precio,class='form-control col-ms-2') }}
+                  {{ render_field(frm.Precio,class='form-control col-ms-2',type="number") }}
                 </div>
 
                 <div class="form-group">
-                  {{ render_field(frm.stock,class='form-control col-ms-2') }}
-                </div>
-                  
-                <button type="submit" class="btn btn-primary">Submit</button>
+                  {{ render_field(frm.stock,class='form-control col-ms-2',type="number") }}
+                </div>                
               <!-- /.box-body -->
+              <div class="box-footer">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+
+            </div>
             </form>
           </div>
 </section>

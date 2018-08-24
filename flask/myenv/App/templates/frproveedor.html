@@ -2,15 +2,25 @@
 {% from '_macro.html' import render_field %}
 
 {%block content%}
-
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-        {% with messages = get_flashed_messages() %}
-        {%if messages%}
+    
+      {% with messages = get_flashed_messages() %}
+        {%if messages %}
           {%for message in messages%}
+         
+          {%if "Error" not in  message[1]:%}
+          <div class=" alert alert-info">
+              <li>{{message}}</li>
+          </div>
+          {%endif%}
+
+          {%if "Error" in  message[1]:%}
           <div class=" alert alert-warning">
               <li>{{message}}</li>
           </div>
+          {%endif%}
+
               {%endfor%}
         {%endif%}
         {%endwith%}
@@ -40,9 +50,10 @@
               <div class="box-body">
 
               <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/> 
-                <div class="form-group">
+             
+              <div class="form-group">
                 {{ render_field(frm.CI,class= 'form-control col-md-2',placeholder='Cedula de Identidad') }}
-                </div>
+              </div>
 
                 <div class="form-group">
                 {{ render_field(frm.Nombre,class= 'form-control col-md-2',placeholder='Nombre') }}
@@ -58,13 +69,12 @@
 
                 <div class="form-group">
                 {{ render_field(frm.Sexo) }}
-                </div>
-
+                </div>                
+              <!-- /.box-body -->
                 <div class="box-footer">
                  <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
-
-              <!-- /.box-body -->
+              </div>
             </form>
           </div>
 </section>

@@ -11,6 +11,8 @@ class Proveedor(db.Model):
 	FechaNacimiento=db.Column(db.DateTime)
 	Sexo=db.Column(db.String(1))
 
+	def as_dict(self):
+		return {'CI': self.CI}
 
 class Clientes(db.Model):
 	__tablename__= "Cliente"
