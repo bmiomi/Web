@@ -1,0 +1,45 @@
+{%from '_macro.html' import render_field %}
+<!DOCTYPE html>
+<html lang="en">
+<body>
+
+    <div class="modal" tabindex="-1" role="dialog" id="modalCliente">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Actualizar Cliente</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form id="Myform">
+                <div class="form-group">
+                  {{render_field(frm.id,class='form-control col-md-2')}}
+                </div>
+                <div class="form-group">
+                  {{render_field(frm.Nombre,class='form-control col-md-2')}}
+                </div>
+                <div class="form-group">
+                  {{render_field(frm.Apellido,class='form-control col-md-2')}}
+                </div>
+                <div class="form-group">
+                  {{render_field(frm.FechaNacimiento)}}
+                </div>
+              </form>
+              </div>
+            <div class="modal-footer">
+              <input id="btton" type="submit" class="btn btn-primary"  value="Guardar Cambios">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+<script>
+        $(document).ready(function () {
+            
+        });
+      </script>      
+    </body>
+</html>

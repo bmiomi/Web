@@ -1,20 +1,25 @@
 {% extends 'base_Interna/base.html'%}
 {% from '_macro.html' import render_field %}
 
-{%block content%}
+{%block contentheader%}
+  {% with messages = get_flashed_messages() %}
+    {%if messages %}
+      {%for message in messages%}
+     
+      {%if "Error" not in  message[1]:%}
+      <div class=" alert alert-info">
+          <li>{{message}}</li>
+      </div>
+      {%endif%}
 
-<!-- Content Wrapper. Contains page content -->
- <div class="content-wrapper">
-{% with messages = get_flashed_messages() %}
-{%if messages%}
-  {%for message in messages%}
-  <div class=" alert alert-warning">
-      <li>{{message}}</li>
-  </div>
+      {%if "Error" in  message[1]:%}
+      <div class=" alert alert-warning">
+          <li>{{message}}</li>
+      </div>
+      {%endif%}
       {%endfor%}
-{%endif%}
-{%endwith%}
-
+    {%endif%}
+    {%endwith%}
       <!-- Content Header (Page header) -->
       <section class="content-header">
         <h1>
@@ -26,7 +31,8 @@
           <li class="active">Dashboard</li>
         </ol>
       </section>
-
+      {%endblock%}
+      {%block content%}
   <section class="content">
     <!-- espacio del dasboard-->
           <div class="box box-primary">
@@ -54,11 +60,11 @@
                 </div>
                 
                 <div class="form-group">
-                  {{ render_field(frm.Precio,class='form-control col-ms-2',type="number") }}
+                  {{ render_field(frm.Precio,class='form-control col-ms-2',type="number",value=0) }}
                 </div>
 
                 <div class="form-group">
-                  {{ render_field(frm.stock,class='form-control col-ms-2',type="number") }}
+                  {{ render_field(frm.stock,class='form-control col-ms-2',type="number",value=0) }}
                 </div>                
               <!-- /.box-body -->
               <div class="box-footer">

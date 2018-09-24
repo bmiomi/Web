@@ -1,21 +1,18 @@
 {% extends 'base_Interna/base.html'%}
 {% from '_macro.html' import render_field %}
 
-{%block content%}
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-    
+{%block contentheader%}    
       {% with messages = get_flashed_messages() %}
         {%if messages %}
           {%for message in messages%}
          
-          {%if "Error" not in  message[1]:%}
+          {%if "Error" not in  message :%}
           <div class=" alert alert-info">
               <li>{{message}}</li>
           </div>
           {%endif%}
 
-          {%if "Error" in  message[1]:%}
+          {%if "Error" in  message[:5]:%}
           <div class=" alert alert-warning">
               <li>{{message}}</li>
           </div>
@@ -24,7 +21,6 @@
               {%endfor%}
         {%endif%}
         {%endwith%}
-
       <!-- Content Header (Page header) -->
       <section class="content-header">
         <h1>
@@ -35,8 +31,8 @@
           <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
           <li class="active">Dashboard</li>
         </ol>
-      </section>
-
+{%endblock%}
+{%block content %}
 <section class="content">
     <!-- espacio del dasboard-->
           <div class="box box-primary">
@@ -48,11 +44,10 @@
             <!-- form start -->
             <form role="form" method="POST">
               <div class="box-body">
-
-              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/> 
-             
-              <div class="form-group">
-                {{ render_field(frm.CI,class= 'form-control col-md-2',placeholder='Cedula de Identidad') }}
+              <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+              
+              <div class="form-group"> 
+              {{ render_field(frm.CI,class= 'form-control col-md-2',placeholder='Cedula de Identidad') }}
               </div>
 
                 <div class="form-group">
@@ -74,8 +69,7 @@
                 <div class="box-footer">
                  <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
+              </form>
               </div>
-            </form>
-          </div>
 </section>
 {%endblock%}

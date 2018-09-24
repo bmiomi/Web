@@ -5,9 +5,9 @@ url_for,abort,session,escape,flash,jsonify
 from werkzeug.security import generate_password_hash,check_password_hash
 from flask_wtf.csrf import CSRFProtect
 from flask_bootstrap import Bootstrap
-from config import DevelopmentConfig
-from Modelo import Proveedor,Clientes,productos,db
-import Forms
+from config.config import DevelopmentConfig
+from Modelos.Modelo import Categoria,Proveedor,Clientes,productos,db
+from View import  Forms
 
 def create_app():
 	app = Flask(__name__)
@@ -33,15 +33,6 @@ def main():
 	valorproductos=db.session.query(productos).filter(productos.Codigo).count()
 	return  render_template("base_Interna/base.html",valorproductos=valorproductos,valorcliente=db.session.query(Clientes).filter(Clientes.id).count())
 
-@app.route("/Lp")
-def Lp():
-	res=Proveedor.query.all()
-	listaproveedores=[r.as_dict() for r in res]
-	print(listaproveedores)
-	return jsonify(listaproveedores)
-
-
-
 @app.route("/register",methods=['GET','POST']) #registro
 def register():
 	frm=Forms.F_Registro(request.form)
@@ -66,12 +57,12 @@ def Singup():
 	titulo="Singup"
 	return render_template("Singup.html", titulo = titulo)
 
-
 @app.route("/proveedor",methods=['GET','POST']) # registro de proveedor
 def proveedor():
 	frm=Forms.Fr_Proveedor(request.form)	
 	if request.method == 'POST': 
-		if frm.validate():
+		pr=db.session.query(Proveedor).filter_by(CI=frm.CI.data).first()
+		if frm.validate() and pr is None:
 			new_user= Proveedor(CI=frm.CI.data,
 								Nombre=frm.Nombre.data,
 								Apellido=frm.Apellido.data,
@@ -85,50 +76,62 @@ def proveedor():
 			flash("Error: No se registrado con exito sus Datos")
 	return render_template("frproveedor.html",frm=frm) 
 
-
 @app.route("/listaP")#listado de Proveedores.
 def listaP():
-	pass
-	return render_template("listaP.html",	listas=Proveedor.query.all())
-
+	titulo="Lista Proveedor"
+	return render_template("listaP.html", titulo=titulo,	listas=Proveedor.query.all())
 
 @app.route("/Cliente",methods=['GET','POST']) #registro de Clientes
 def Cliente():
 	frm=Forms.Fr_Personal(request.form)
 	if request.method == "POST":
-		if frm.validate():
-			cliente=Clientes(CI=frm.CI.data,
-							nombre=frm.Nombre.data,
-							apellido=frm.Apellido.data,
-							fechaN=frm.FechaNacimiento.data
+		print(pr)
+		if frm.validate() and pr is None:
+			cliente=Clientes(
+							id=frm.id.data,
+							Nombre=frm.Nombre.data,
+							Apellido=frm.Apellido.data,
+							FechaNacimiento=frm.FechaNacimiento.data
 							)
 			db.session.add(cliente)
-			db.commit()
+			print(cliente)
+			db.session.commit()
 			flash("Se Aguardado los datos exitosamente")
-	else:
-			flash("No se registrado con exito sus datos",category="error")
+		else:
+			flash("Error:No se ha registrado con exito sus Datos.")
 	return render_template('frcliente.html',frm=frm)
 
 @app.route("/listaC") #listado de Clientes.
 def listaC():
 	titulo = "Listado de Clientes"
-	return render_template("listaC.html", titulo=titulo ,listas=Clientes.query.all())
+	res=Clientes.query.all()
+	lista=[r.as_dict() for r in res]
+	return render_template("listaC.html", titulos=titulo)
+
+@app.route("/Lp")
+def Lp():
+	res=Clientes.query.all()
+	listaproveedores=[r.as_dict() for r in res]
+	return jsonify({'data':listaproveedores})
 
 @app.route("/Productos",methods=['GET','POST']) #registro de Productos
 def Productos():
 	frm=Forms.Fr_Productos(request.form)
-	if request.method == "POST" and frm.validate():
+	if request.method == "POST":
 		pr=db.session.query(productos).filter_by(Codigo=frm.Codigo.data).first()
-		if pr is None:
-#Insercion db
-			dbproductos = productos (Codigo=frm.Codigo.data,nombre=frm.nombre.data,
-									Categoria=frm.Categoria.data,Precio=frm.Precio.data,
-									stock=frm.stock.data)
+		if frm.validate() and pr is None:
+			dbproductos = productos(Codigo=frm.Codigo.data,
+									nombre=frm.nombre.data,
+									Categoria=frm.Categoria.data,
+									Precio=frm.Precio.data,
+									stock=frm.stock.data
+									)
 			db.session.add(dbproductos)
 			db.session.commit()
+			flash("Los datos an sido exitosamente Guardados")
+			redirect(url_for('Productos'))
 		else:
-			mensaje="Error al ingresar los datos esto de puede deber a que ya existe ese producto con ese codigo"
-			flash(mensaje)
+			flash("Error: No se registrado con exito sus Datos.")
 	return render_template('frProductos.html',frm=frm)
 
 @app.route("/listaPr") #listado de productos.	
@@ -137,11 +140,43 @@ def listaPr():
 
 	return render_template("listaPr.html", titulo=titulo,listas=productos.query.all())
 
+@app.route("/Categoria")
+def categoria():
+	frm=Forms.Fr_Categoria(request.form)
+	if request.method == "POST":
+		pr=db.session.query(Categoria).filter_by(codigo=frm.request['codigo']).first()
+		if frm.validate and pr is None:
+			dbcategoria=categoria(
+								Codigo=frm.Codigo.data,
+								Nombre=frm.Codigo.data
+								)
+			db.session.add(dbcategoria)
+			db.session.commit()
+			flash("Los datos an sido exitosamente Guardados")
+			redirect(url_for('categoria'))
+		else:
+			flash("Error: No se  ah registrado con exito sus Datos")
+	return render_template("frCategoria.html",frm=frm)
+
+@app.route("/ListaCate")
+def ListaCate():
+	pass
+	return render_template("ListaCate.html",lista=Categoria.query.all())
+
+@app.route("/modal")
+def modal():
+	return render_template("modal.html")
+
+@app.route("/modalc" ,methods=['GET','POST'])
+def modalc():
+	frm=Forms.Fr_Personal(request.form)
+	if request.method == "POST":
+		pass
+	return render_template("modalcliente.html",frm=frm)
 
 if __name__ == "__main__":
 	csrf.init_app(app)
 	db.init_app(app)
-
 	with app.app_context():
 		db.create_all()# metodo para crear tablas y la propia db
 	app.run( port=8001,debug=True)
