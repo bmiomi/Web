@@ -1,4 +1,5 @@
 {
     "python.jediEnabled": false,
-    "python.pythonPath": "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\Anaconda3_64\\python.exe"
+    "python.pythonPath": "myen/bin/python",
+    "git.ignoreLimitWarning": true
 }

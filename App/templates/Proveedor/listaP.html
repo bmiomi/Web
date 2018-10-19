@@ -1,0 +1,77 @@
+<!-- Lista proveedores-->
+{% extends 'base_Interna/base.html'%}
+{%block title%}{{titulo}}{%endblock%}
+{%block header%}
+<!-- DataTables -->
+<link rel="stylesheet" href=" {{ url_for ( 'static', filename='bower_components/datatables.net/css/dataTables.bootstrap.min.css') }}">
+<link rel="stylesheet" href=" {{ url_for ( 'static', filename='bower_components/datatables.net/css/jquery.dataTables.min.css') }}">
+{%endblock%}
+
+{%block contentheader%}
+<!-- Content Header (Page header) -->
+<section class="content-header">
+  <h1>
+  Tabla de Datos
+  <small>Proveédores</small>
+</h1>
+<ol class="breadcrumb">
+  <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+  <li><a href="#">Tables</a></li>
+  <li class="active">Data tables</li>
+</ol>
+<div class="ajaxs"></div>
+{%endblock%}
+</section>
+
+{%block content%}
+<section class="content">
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="box">
+        <div class="box-header">
+          <h3 class="box-title">Listado de Proveédores</h3>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <table id="example2" class="table table-bordered table-hover">
+            <thead>
+              <tr>
+                <th>RazonSocial</th>
+                <th>Ruc/Rise</th>
+                <th>Direccion</th>
+                <th>correo</th>
+                <th>Convencional</th>
+                <th>Celular</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              
+              {%for objeto in listas%}
+              <tr>
+                <td>{{objeto.razonSolcial}}</td>
+                <td>{{objeto.CI}}</td>
+                <td>{{objeto.Direccion}}</td>
+                <td>{{objeto.Correo}}</td>
+                <td> {{objeto.Convencional}}</td>
+                <td>{{objeto.Celular}}</td>
+              </tr>
+              {%endfor%}
+
+            </tbody>
+
+          </table>
+        </div>
+        <!-- /.box-body -->
+      </div>
+    </div>
+  </div>
+</section>
+{%endblock%} 
+
+{%block scripts%}
+<!-- DataTables -->
+<script src="{{ url_for ( 'static' ,filename='bower_components/datatables.net/js/datatables.min.js') }}"></script>
+<script src="{{ url_for ( 'static' ,filename='bower_components/datatables.net/js/dataTables.bootstrap.min.js') }}"></script>
+<script src="{{ url_for ( 'static' ,filename='js/tablaproveedor.js') }}"></script>
+{%endblock%}

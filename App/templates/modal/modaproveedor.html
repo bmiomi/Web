@@ -1,0 +1,43 @@
+{%from '_macro.html' import render_field %}
+<div  id="modalProveedor" class="modal" role="dialog" >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h3 class="modal-title">Actualizar {{title}}</h3>
+        </div>
+
+        <div class="modal-body">
+          <form  method="POST">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />         
+
+            <div class="form-group "> 
+              {{ render_field(frm.RasonSocial,class= 'form-control  col-md-2') }}
+              </div>
+            <div class="form-group">
+              {{ render_field (frm.CI,class='form-control col-md-2') }}
+            </div>         
+            <div class="form-group">
+              {{render_field(frm.Direccion,class='form-control col-md-2')}}
+            </div>         
+            <div class="form-group">
+              {{render_field(frm.Correo,class='form-control col-md-2')}}
+            </div>
+            <div class="form-group">
+              {{render_field(frm.Convencional,class='form-control')}}
+            </div>
+            <div class="form-group">
+                {{ render_field(frm.Celular) }}
+              </div>
+          </form>
+          </div>
+        <div class="modal-footer">
+          <button  class="btn btn-info" type="submit" id="enviar" >Guardar Cambios</button>  
+          <a class="btn btn-warning" type="submit" id="Eliminar" >Eliminar</a> 
+          <button type="submit" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
