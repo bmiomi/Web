@@ -9,11 +9,13 @@
           <h3 class="modal-title">Actualizar {{title}}</h3>
         </div>
 
-        <div class="modal-body">
-          <form  method="POST">
-            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />         
+        <form  method="POST" action="{{ url_for('Proveedor.UpdateP')}}">
+          <div class="modal-body">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />   
+            
+            <div >{{(frm.fld)}}</div>      
 
-            <div class="form-group "> 
+            <div class="form-group"> 
               {{ render_field(frm.RasonSocial,class= 'form-control  col-md-2') }}
               </div>
             <div class="form-group">
@@ -29,15 +31,17 @@
               {{render_field(frm.Convencional,class='form-control')}}
             </div>
             <div class="form-group">
-                {{ render_field(frm.Celular) }}
+                {{ render_field(frm.Celular,class='form-control') }}
               </div>
-          </form>
           </div>
-        <div class="modal-footer">
-          <button  class="btn btn-info" type="submit" id="enviar" >Guardar Cambios</button>  
-          <a class="btn btn-warning" type="submit" id="Eliminar" >Eliminar</a> 
-          <button type="submit" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+
+          <div class="modal-footer">
+          <a type="submit" class="btn btn-info" " id="enviar" href="{{ url_for('Proveedor.UpdateP')}}" >Guardar Cambios</a>  
+          <a type='submit' class="btn btn-warning" id="Eliminar" >Eliminar</a> 
+          <button  type='submit' class="btn btn-default" data-dismiss="modal">Cerrar</button>
         </div>
+      </form>
+
       </div>
     </div>
   </div>

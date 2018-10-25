@@ -46,5 +46,5 @@ def SalidaAl():
 
 @Almacen.route('/MovimientosAlmacen')
 def Movimientos():
-    return 'Hola baby'
+    return render_template('Almacen/Movimientos.html',detalle =Detalle.query.join(ingreso).filter(ingreso.cod_ingreso).all())
 

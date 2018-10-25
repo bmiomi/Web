@@ -1,3 +1,4 @@
+
 <!-- Lista proveedores-->
 {% extends 'base_Interna/base.html'%}
 {%block title%}{{titulo}}{%endblock%}
@@ -53,13 +54,11 @@
                 <td>{{objeto.CI}}</td>
                 <td>{{objeto.Direccion}}</td>
                 <td>{{objeto.Correo}}</td>
-                <td> {{objeto.Convencional}}</td>
+                <td> {{objeto.convencional}}</td>
                 <td>{{objeto.Celular}}</td>
               </tr>
               {%endfor%}
-
             </tbody>
-
           </table>
         </div>
         <!-- /.box-body -->

@@ -9,7 +9,7 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Tabla de Datos
+      Resumen de Movimientos de Productos
       <small>Productos</small>
     </h1>
     <ol class="breadcrumb">
@@ -27,27 +27,27 @@
       <div class="col-xs-12">
         <div class="box">
           <div class="box-header">
-            <h3 class="box-title">Listado de Productos</h3>
+            <h3 class="box-title">Movimientos</h3>
           </div>
           <!-- /.box-header -->
           <div class="box-body">
             <table id="example2" class="table table-bordered table-hover">
               <thead>
                 <tr>
-                  <th>Codigo</th>
-                  <th>Nombre</th>
-                  <th>PrecioVenta</th>
-                  <th>stock</th>
+                  <th>CodigProducto</th>
+                  <th>Ingreso</th>
+                  <th>Salida</th>
+                  <th>Cantidad</th>
                 </tr>
               </thead>
 
               <tbody>
-                {%for objeto in listas%}
+                {%for _detalle in detalle%}
                 <tr>
-                  <td>{{objeto.Codigo}}</td>
-                  <td>{{objeto.nombre}}</td>
-                  <td> {{objeto.Precio}}</td>
-                  <td>{{objeto.stock}}</td>
+                  <td>{{_detalle.codProducto}}</td>
+                  <td>{{_detalle.codingreso}}</td>
+                  <td> {{_detalle.codsalida}}</td>
+                  <td>{{_detalle.cantidad}}</td>
                 </tr>
                 {%endfor%}
               </tbody>
@@ -62,5 +62,4 @@
   {%block scripts%}
  <!-- DataTables -->
  <script src="{{ url_for ( 'static' ,filename='bower_components/datatables.net/js/datatables.min.js') }}"></script>
- <script src="{{ url_for ( 'static' ,filename='js/tablaproductos.js') }}"></script>
  {%endblock%}

@@ -33,6 +33,7 @@ def main():
     return render_template("base_Interna/base.html",valorproductos=1)
 
 
+
 from App.Modulos.cliente.control import cliente
 from App.Modulos.Proveedor.controllers import _Proveedor
 from App.Modulos.Almacen.controllers import Almacen

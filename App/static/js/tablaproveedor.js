@@ -5,6 +5,7 @@ $(document).ready(function () {
         $(this).addClass("selected").siblings().removeClass('selected');
         a=t.row(this).data();
         llamado(a);
+        console.log(a);
     });
     
 });
@@ -14,17 +15,14 @@ var llamado=function (row) {
         $('#modalProveedor').modal("show");
            $("#RasonSocial").val( row[0]);
            $("#CI").val( row[1]);
-           $("#Nombre").val(row[2]); 
-           $("#Apellido").val(row[3]); 
-           $("#FechaNacimiento").val(row[4]);
-           var a =row[5];
-        if ( a == "M"){
-            $("#Sexo #Sexo-0").attr('checked','true');
-        }else if(a == "F"){
-            $("#Sexo #Sexo-1").attr('checked','true');
-        };
-        var url= 'deleteP/'+ row[6]
-        $("#Eliminar").attr('href',url);  
+           $("#Direccion").val(row[2]); 
+           $("#Correo").val(row[3]); 
+           $("#Convencional").val(row[4]);
+           $("#Celular").val(row[5]);
+
+           var url = 'deleteP/'+row[1]
+           $("#Eliminar").attr('href',url);  
+       
+
     });
 }
-
