@@ -30,29 +30,29 @@ def proveedor():
             flash("Error: No se registrado con exito sus Datos")
     return render_template('Proveedor/frproveedor.html', frm=frm)
 
-@_Proveedor.route('/listaP',methods=['POST','GET'])  # listado de Proveedores.
+@_Proveedor.route('/listaP')  # listado de Proveedores.
 def listaP():
     titulo = "Lista Proveedor"
     return render_template("Proveedor/listaP.html", titulo=titulo, listas=Proveedor.query.all())
 
-@_Proveedor.route('/UpdateP',methods=['POST','GET'])
+@_Proveedor.route('/UpdateP', methods=[ 'POST'])
 def UpdateP():
-    if request.method =='POST':
-        updateP = Proveedor.query.filter_by(CI=request.form['CI']).first()
-        print("proveedor con cedular: {0}"%(updateP))
-        updateP.RasonSocial = request.form['RasonSocial']
-        updateP.Direccion = request.form['Direccion']
-        updateP.Correo = request.form['Correo']
-        updateP.convencional= request.form['Convencional']
-        updateP.Celular = request.form['Celuar']
-        db.session.commit()
+    print(request.form)
+
+    updateP = Proveedor.query.filter_by(CI=request.form['CI']).first()
+    print("ci:",updateP.CI)
+    updateP.razonSolcial = request.form['RasonSocial']
+    updateP.Direccion = request.form['Direccion']
+    updateP.Correo = request.form['Correo']
+    updateP.convencional= request.form['Convencional']
+    updateP.Celular = request.form['Celular']
+    db.session.commit()
     return redirect(url_for('Proveedor.listaP'))
 
 
 @_Proveedor.route('/deleteP/<string:id>',methods=['GET','POST'])
 def deleteP(id=None):
     dlTP = Proveedor.query.filter_by(CI=id).first()
-    print(dlTP)
     db.session.delete(dlTP) 
     db.session.commit()
     return redirect(url_for('Proveedor.listaP'))

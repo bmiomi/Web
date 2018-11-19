@@ -1,13 +1,13 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 from wtforms import Form ,validators,StringField
-
-
-def pp(form,field):
-	if len(field.data)==0:
-		raise validators.ValidationError('dsdas')
-
+from wtforms.validators import ValidationError
+from App.Modulos.Categoria.model import Categoria
+from App.Validadores.validar import Unique
+    
 class Fr_Categoria(Form):
 
 	Codigo=StringField('Codigo')
-	Nombre=StringField('Nombre Identificativo',[validators.length(min=3,max=6,message="error0")])
+	Nombre=StringField('Nombre Identificativo',[
+                        validators.Length(min=2,message="No exede o exede la cantidad de caracteres validos"),
+                        Unique(Categoria,Categoria.Nombre)])

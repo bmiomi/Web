@@ -9,31 +9,34 @@
           <h3 class="modal-title">Actualizar {{title}}</h3>
         </div>
 
-        <div class="modal-body">
-          <form   method="POST">
-            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />         
+          <form  method="POST"  >
+           
+            <div class="modal-body">           
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />  
             <div class="form-group">
-              {{ render_field (frm.Codigo,class='form-control col-md-2') }}
-            </div>         
+              {{ render_field (frm.Codigo,class='form-control col-md-2',disabled='') }}
+            </div>    
+
             <div class="form-group">
               {{render_field(frm.nombre,class='form-control col-md-2')}}
-            </div>         
+            </div>  
+
             <div class="form-group">
-              {{render_field(frm.Categoria,class='form-control col-md-2')}}
+              {{render_field(frm.P_U_C,class='form-control col-md-2')}}
             </div>
+
             <div class="form-group">
-              {{render_field(frm.Precio,class='form-control')}}
+              {{render_field(frm.P_U_V,class='form-control')}}
             </div>
-            <div class="form-group">
-             {{ render_field(frm.stock) }}
+
+            <div class="modal-footer">
+              <button class="btn btn-info" type="submit" id="enviar" formaction="{{url_for('Productos.UpdatePr')}}">Guardar Cambios</button>  
+              <button type="submit" class="btn btn-default" data-dismiss="modal">Cerrar</button>
             </div>
-          </form>
-          </div>
-        <div class="modal-footer">
-          <button  class="btn btn-info" type="submit" id="enviar" >Guardar Cambios</button>  
-          <a   class="btn btn-warning" type="submit" id="Eliminar" >Eliminar</a> 
-          <button type="submit" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+            
         </div>
+      </form>
+
       </div>
     </div>
   </div>

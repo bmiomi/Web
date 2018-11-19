@@ -12,7 +12,7 @@ $(document).ready(function () {
 
 var llamado=function (row) { 
     $(".ajaxs").load("modalP",function (a) {
-        $('#modalProveedor').modal("show");
+        $('#modalProveedor').modal("show"); 
            $("#RasonSocial").val( row[0]);
            $("#CI").val( row[1]);
            $("#Direccion").val(row[2]); 

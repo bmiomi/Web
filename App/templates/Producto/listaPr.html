@@ -36,6 +36,7 @@
                 <tr>
                   <th>Codigo</th>
                   <th>Nombre</th>
+                  <th>PrecioCompra</th>
                   <th>PrecioVenta</th>
                   <th>stock</th>
                 </tr>
@@ -46,7 +47,8 @@
                 <tr>
                   <td>{{objeto.Codigo}}</td>
                   <td>{{objeto.nombre}}</td>
-                  <td> {{objeto.Precio}}</td>
+                  <td> $ {{objeto.PrecioCompra}}</td>
+                  <td> $ {{objeto.PrecioVenta}}</td>
                   <td>{{objeto.stock}}</td>
                 </tr>
                 {%endfor%}

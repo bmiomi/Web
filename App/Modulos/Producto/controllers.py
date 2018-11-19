@@ -17,40 +17,42 @@ def Productos():
         if frm.validate() and pr is None:
             dbproductos = productos(Codigo=frm.Codigo.data,
                                     nombre=frm.nombre.data,
-                                    Precio=frm.Precio.data,
+                                    PrecioCompra=frm.P_U_C.data,
+                                    PrecioVenta=frm.P_U_V.data,
                                     stock=0,
                                     Categoria=request.form['Categoria']
                                     )
             db.session.add(dbproductos)
             db.session.commit() 
             flash("Los datos an sido exitosamente Guardados")
+            return redirect(url_for('Productos.Productos'))
         else:
             flash("Error: No se registrado con exito sus Datos.")
     return render_template('Producto/frProductos.html', frm=frm)
     
-@Producto.route("/listaPr")  # listado de productos.
+@Producto.route("/listaPr", methods=['GET','POST'])  # listado de productos.
 def listaPr():
 	titulo = "Listado de Productos"
 	listas = productos.query.order_by(productos.Codigo).all()
 	return render_template("Producto/listaPr.html", titulo=titulo, listas=listas)
 
+
 @Producto.route("/UpdatePr", methods=['POST'])
 def UpdatePr():
-
-    update = productos.query.filter_by(id=request.form['Codigo']).first()
-    update.Nombre = request.form['Nombre']
-    update.Apellido = request.form['Categoria']
-    update.FechaNacimiento = request.form['Precio']
-    update.FechaNacimiento = request.form['stock']
+    update = productos.query.filter_by(Codigo=request.form['Codigo']).first()
+    update.nombre = request.form['nombre']
+    update.PrecioCompra = request.form['P_U_C']
+    update.PrecioVenta = request.form['P_U_V']
     db.session.commit()
-    return redirect(url_for('listaPr'))
+    return redirect(url_for('Productos.listaPr'))
 
-
-@Producto.route('/deletePr/<string:id>')
-def deletePr(id):
-    dlete = productos.query.filter_by(codigo=id).delete()
+@Producto.route('/deletePr',methods=['POST'])
+def deletePr():
+    print(request.form)
+    dlete = productos.query.filter_by(Codigo=request.form['Codigo']).first()
+    db.session.delete(dlete)
     db.session.commit()
-    return redirect(url_for('listaPr'))
+    return redirect(url_for('Productos.listaPr'))
 
 @Producto.route("/modalPr")
 def modalPr():

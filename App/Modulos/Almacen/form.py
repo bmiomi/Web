@@ -22,13 +22,15 @@ def data():
         return data.cod_ingreso+1
 
 class Fr_Almacen(Form):
-    Codigo= IntegerField('Ingreso N#',[validators.Required(message="El codigo del producto es Obligatorio")],default=data)
-    nombre=QuerySelectField('Producto',allow_blank=True,blank_text='Seleccionar',query_factory=get_producto,get_label='nombre')
+    Codigo= IntegerField('Ingreso N#',default=data)
+    Producto=QuerySelectField('Producto',allow_blank=True,blank_text='Seleccionar',query_factory=get_producto,get_label='nombre')
     fecha=DateField("FECHA",default=datetime.today)
     Receptor=StringField('Receptor')
     proveedor=QuerySelectField('Proveedor',allow_blank=True,blank_text='Seleccionar',query_factory=get_proveedor,get_label='razonSolcial')
     Emisor=StringField('Emisor')
-    cantidad=IntegerField('Cantidad')
+    Docenas=IntegerField('Docenas')
+    Unidades=IntegerField('Unidades')
+
 
 def datas():
     data=Salida.query.order_by(Salida.Codigo.desc()).first() 

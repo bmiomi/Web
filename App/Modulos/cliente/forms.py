@@ -6,3 +6,4 @@ class Fr_Personal (Form):
     validators.Length(min=4,max=10,message="El campo es obligatorio")])
     Nombre=StringField('Nombre')
     Apellido=StringField('Apellido')
+    

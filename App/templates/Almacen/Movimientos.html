@@ -4,13 +4,14 @@
 {%block header%}
 <!-- DataTables -->
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+
 {%endblock%}
 {%block contentheader%}
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Resumen de Movimientos de Productos
-      <small>Productos</small>
+      Resumen de Movimientos  
+      <small>Diario</small>
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -34,20 +35,33 @@
             <table id="example2" class="table table-bordered table-hover">
               <thead>
                 <tr>
-                  <th>CodigProducto</th>
-                  <th>Ingreso</th>
-                  <th>Salida</th>
-                  <th>Cantidad</th>
+                  <th>Modelo</th>
+                  <th >Movimientos</th>
                 </tr>
               </thead>
 
               <tbody>
                 {%for _detalle in detalle%}
                 <tr>
-                  <td>{{_detalle.codProducto}}</td>
-                  <td>{{_detalle.codingreso}}</td>
-                  <td> {{_detalle.codsalida}}</td>
-                  <td>{{_detalle.cantidad}}</td>
+                <td>{{_detalle.nombre}}</td>
+                <td>
+                  {%if _detalle.Ingresos != 0:%}
+                    <a id ="ingreso" class="btn btn-primary btn-sm" >
+                        <span class="badge bg-yellow">{{_detalle.Ingresos}}</span>
+                        <i >Ingresos</i> 
+                      </a>
+                    {%endif%}
+
+                    {%if _detalle.salida != 0:%}
+                      <a id="salida" class="btn btn-info btn-sm">
+                          <span class="badge bg-yellow">{{_detalle.salida}}</span>               
+                          <i >Salida</i>
+                        </a>
+                    {%endif%}
+
+
+               </td>
+
                 </tr>
                 {%endfor%}
               </tbody>
@@ -59,7 +73,11 @@
     </div>
   </section>
   {%endblock%} 
+  
   {%block scripts%}
  <!-- DataTables -->
  <script src="{{ url_for ( 'static' ,filename='bower_components/datatables.net/js/datatables.min.js') }}"></script>
+ <script src="{{ url_for ( 'static' ,filename='js/Almacen.js') }}"></script>
  {%endblock%}
+
+

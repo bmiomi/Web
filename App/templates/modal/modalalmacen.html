@@ -1,0 +1,43 @@
+{%from '_macro.html' import render_field %}
+
+<div  id="modalalmacen" class="modal" role="dialog" >
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h3 class="modal-title">Movimientos de Ingreso </h3>
+      </div>
+
+      <div class="modal-body">
+
+        <table>
+          <thead>
+            <tr>
+            <th>fechaIngreso</th>
+          </tr>
+          </thead>
+
+          <tbody>
+            
+            {%for dato in datos%}
+             <tr>
+               <td>{{dato.fecha_ingreso}} </td>
+              </tr>
+             {%endfor%}
+
+
+
+          </tbody>
+        </table>
+
+        </div>
+      <div class="modal-footer">
+        <button  class="btn btn-info" type="submit" id="enviar" >Guardar Cambios</button>  
+        <a   class="btn btn-warning" type="submit" id="Eliminar" >Eliminar</a> 
+        <button type="submit" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>

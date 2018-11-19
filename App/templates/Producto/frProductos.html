@@ -48,7 +48,7 @@
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
         <div class="form-group">
           {{ render_field(frm.Codigo,class= 'form-control col-ms-2',placeholder='El Codigo del producto es
-          Obligatorio') }}
+          Obligatorio',disabled='') }}
         </div>
 
         <div class="form-group">

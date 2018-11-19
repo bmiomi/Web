@@ -5,17 +5,18 @@
     {%if messages %}
       {%for message in messages%}
      
-      {%if "Error" not in  message[1]:%}
+      {%if "Error" not in  message[:5]:%}
       <div class=" alert alert-info">
           <li>{{message}}</li>
       </div>
       {%endif%}
 
-      {%if "Error" in  message[1]:%}
+      {%if "Error" in  message[:5]:%}
       <div class=" alert alert-warning">
           <li>{{message}}</li>
       </div>
       {%endif%}
+      
       {%endfor%}
     {%endif%}
     {%endwith%}
@@ -45,10 +46,10 @@
             <form role="form" method="POST">
               <div class="box-body">
 
-                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />                    
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />                    
 
               <div class="form-group">
-                    {{render_field(frm.Codigo,class='form-control col-md-2')}}
+                    {{render_field(frm.Codigo,class='form-control col-md-2',disabled="" )}}
                 </div>
                 <div class="form-group">
                         {{render_field(frm.fecha,class='form-control')}}
