@@ -4,9 +4,11 @@ from flask import Blueprint, Flask, render_template, request, make_response, red
 from App import app
 # Importacion de modulo de ModeloCliente
 from App.Modulos.Almacen.model import ingreso,Salida,Detalle
+from App.Modulos.Categoria.model import Categoria
+
 from App.Modulos.Producto.model import productos
 from App.Modulos.Proveedor.model import Proveedor
-
+from sqlalchemy import func, and_,between
 #Inportacion de modulo de formularioCliente
 from App.Modulos.Almacen import form 
 from App import db
@@ -76,12 +78,16 @@ def SalidaAl():
 
 @Almacen.route('/MovimientosAlmacen')
 def Movimientos():
-    sql="""
-    select  nombre,count(codingreso) as Ingresos,count(codsalida) as salida   
-    from detalle,productos
-    where codProducto=Codigo group by (nombre);
-    """
-    detalle=db.session.execute(sql)
+    sql= db.session.query(Categoria.Nombre,productos.nombre,ingreso.fecha_ingreso,func.count(Detalle.codingreso)
+    ).filter(Categoria.id== productos.Categoria 
+    ).filter( productos.Codigo == Detalle.codProducto
+    ).filter(  Detalle.codingreso==ingreso.cod_ingreso
+    ).filter(ingreso.fecha_ingreso == '2018-11-25'
+    ).group_by(productos.nombre)
+    print(sql)
+
+
+    detalle=sql
     return render_template('Almacen/Movimientos.html',detalle=detalle)
 
 
@@ -91,3 +97,6 @@ def modalAL():
     datos=db.session.execute(sql)
     return render_template('modal/modalalmacen.html',datos=datos)
 
+@Almacen.route('/Inventa')
+def Inventa():
+    return render_template('Almacen/Inventa.html')

@@ -190,7 +190,20 @@
               <li><a href="{{url_for('Almacen.Movimientos')}}"><i class="fa fa-circle-o"></i>Movimientos</a></li>
             </ul>
           </li>
-
+<!--Inventario -->
+          <li class=" treeview">
+            <a href="#">
+              <i class="fa fa-dashboard"></i>
+              <span>Inventario</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+             <li class="active"><a href="{{url_for('Almacen.Inventa')}}"><i class="fa fa-circle-o"></i> Inventario Inical</a></li>
+              <li class="active"><a href="{{url_for('Proveedor.listaP')}}"><i class="fa fa-circle-o"></i> Res.Movimientos</a></li>
+            </ul> 
+          </li>
           <!-- opcion de cliente-->
           <li class="treeview">
             <a href="#">

@@ -1,8 +1,11 @@
 #Importacion de Dependencias Flask
 from flask import Blueprint, Flask, render_template, request, make_response, redirect,url_for,flash, jsonify
 from App import db
-# Importacion de modulo de ModeloCliente
+# Importacion de modulo de ModeloProducto
 from App.Modulos.Producto.model import productos
+# Importacion de modulo de ModeloCategoria
+from App.Modulos.Categoria.model import Categoria
+
 #Inportacion de modulo de formularioCliente
 from App.Modulos.Producto import form 
 #
@@ -32,9 +35,12 @@ def Productos():
     
 @Producto.route("/listaPr", methods=['GET','POST'])  # listado de productos.
 def listaPr():
-	titulo = "Listado de Productos"
-	listas = productos.query.order_by(productos.Codigo).all()
-	return render_template("Producto/listaPr.html", titulo=titulo, listas=listas)
+
+    titulo = "Listado de Productos"
+    listas = db.session.query(Categoria.Nombre,productos.nombre,productos.PrecioCompra,productos.PrecioVenta,productos.stock).join(productos).all()
+    for i in listas:
+        print(i)
+    return render_template("Producto/listaPr.html", titulo=titulo, listas=listas)
 
 
 @Producto.route("/UpdatePr", methods=['POST'])

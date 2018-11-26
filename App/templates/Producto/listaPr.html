@@ -34,8 +34,8 @@
             <table id="example2" class="table table-bordered table-hover">
               <thead>
                 <tr>
-                  <th>Codigo</th>
-                  <th>Nombre</th>
+                  <th>Categoria</th>
+                  <th>Nombre/Descripcion</th>
                   <th>PrecioCompra</th>
                   <th>PrecioVenta</th>
                   <th>stock</th>
@@ -45,7 +45,7 @@
               <tbody>
                 {%for objeto in listas%}
                 <tr>
-                  <td>{{objeto.Codigo}}</td>
+                  <td>{{objeto.Nombre}}</td>
                   <td>{{objeto.nombre}}</td>
                   <td> $ {{objeto.PrecioCompra}}</td>
                   <td> $ {{objeto.PrecioVenta}}</td>

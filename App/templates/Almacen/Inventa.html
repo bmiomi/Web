@@ -10,8 +10,7 @@
   <!-- Content Header (Page header) -->
   <section class="content-header">
     <h1>
-      Resumen de Movimientos  
-      <small>Diario</small>
+     Inventario 
     </h1>
     <ol class="breadcrumb">
       <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -30,12 +29,20 @@
           <div class="box-header">
             <h3 class="box-title">Movimientos</h3>
           </div>
+
+          <div class="date">
+            <label for="date">Deste</label>
+            <input type='date'>
+          </div>
+          <div class="date">
+              <label for="date">Asta</label>
+              <input type='date'>
+            </div>
           <!-- /.box-header -->
           <div class="box-body">
             <table id="example2" class="table table-bordered table-hover">
               <thead>
-                <tr>                  
-                  <th>Fecha</th>
+                <tr>
                   <th>Modelo</th>
                   <th >Movimientos</th>
                 </tr>
@@ -44,8 +51,6 @@
               <tbody>
                 {%for _detalle in detalle%}
                 <tr>
-                <td>{{_detalle.fecha_ingreso}}</td>
-
                 <td>{{_detalle.nombre}}</td>
                 <td>
                   {%if _detalle.Ingresos != 0:%}
@@ -65,8 +70,7 @@
 
                </td>
 
-</tr>
-
+                </tr>
                 {%endfor%}
               </tbody>
             </table>
